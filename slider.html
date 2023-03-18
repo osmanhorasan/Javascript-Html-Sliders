@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .slider {
+            position: relative;
+            width: 320px;
+            height: 480px;
+            overflow: hidden;
+        }
+
+        .slider-container {
+            display: flex;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slider-container img {
+            width: 320px;
+            height: 480px;
+            object-fit: cover;
+        }
+
+        button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 30px;
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        #prev {
+            left: 10px;
+        }
+
+        #next {
+            right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slider">
+        <div class="slider-container">
+            <img src="https://picsum.photos/id/237/320/480" alt="Slide 1">
+            <img src="https://picsum.photos/id/248/320/480" alt="Slide 2">
+            <img src="https://picsum.photos/id/259/320/480" alt="Slide 3">
+            <img src="https://picsum.photos/id/270/320/480" alt="Slide 4">
+        </div>
+        <button id="prev">&lt;</button>
+        <button id="next">&gt;</button>
+    </div>
+
+    <script>
+        const sliderContainer = document.querySelector(".slider-container");
+        const prevButton = document.getElementById("prev");
+        const nextButton = document.getElementById("next");
+
+        let slideIndex = 0;
+        const slides = document.querySelectorAll(".slider-container img");
+
+        prevButton.addEventListener("click", () => {
+            slideIndex--;
+            if (slideIndex < 0) {
+                slideIndex = slides.length - 1;
+            }
+            sliderContainer.style.transform = `translateX(-${slideIndex * 320}px)`;
+        });
+
+        nextButton.addEventListener("click", () => {
+            slideIndex++;
+            if (slideIndex >= slides.length) {
+                slideIndex = 0;
+            }
+            sliderContainer.style.transform = `translateX(-${slideIndex * 320}px)`;
+        });
+    </script>
+</body>
+
+</html>
